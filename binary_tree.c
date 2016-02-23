@@ -87,6 +87,21 @@ int printLevelOrder(tnode *node, int level)
     }
 }
 
+/*
+ * print Leaf nodes from the tree
+ */
+void printLeafNodes(tnode *node)
+{
+    if (node == NULL)
+        return;
+
+    if (node->left == NULL &&  node->right == NULL)
+        printf(" %d ", node->data);
+
+    printLeafNodes(node->left);
+    printLeafNodes(node->right);
+}
+
 int main(void)
 {
     tnode *root = NULL, *node = NULL;
@@ -103,9 +118,14 @@ int main(void)
     printf("Inorder Traversal:\n");
     printInorder(root);
     printf("\n");
+
     printf("Levelorder Traversal: %d\n", maxDepth(root));
     for (i = 0; i < maxDepth(root); i++) {
         printLevelOrder(root, i);
         printf("\n");
     }
+
+    printf("Leaf Nodes: \n");
+    printLeafNodes(root);
+    printf("\n");
 }
